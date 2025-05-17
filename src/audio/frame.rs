@@ -2,6 +2,11 @@ use std::io::Error;
 
 use super::header::MP3AudioFrameHeader;
 
+#[derive(Debug)]
+pub struct MP3SideInfo {}
+impl MP3SideInfo {}
+
+#[derive(Debug)]
 pub struct MP3AudioFrame<'a> {
     pub header: MP3AudioFrameHeader,
     pub data: &'a [u8],

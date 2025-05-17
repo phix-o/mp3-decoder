@@ -181,6 +181,9 @@ pub struct MP3AudioFrameHeader {
 
     /// Whether this bitstream is original or a copy
     is_original: bool,
+
+    // misc
+    duration_per_frame: f64,
 }
 impl MP3AudioFrameHeader {
     pub fn from_bytes(bytes: &[u8; 4]) -> Result<Self, Error> {
@@ -243,6 +246,7 @@ impl MP3AudioFrameHeader {
         // Ignore the emphasis
 
         let bitrate = bitrate_from_index.unwrap();
+        let duration_per_frame = layer.get_samples_per_frame() as f64 / sample_rate as f64;
 
         Ok(Self {
             mpeg_version,
@@ -255,6 +259,7 @@ impl MP3AudioFrameHeader {
             mode_extension,
             is_copywrighted,
             is_original,
+            duration_per_frame,
         })
     }
 }

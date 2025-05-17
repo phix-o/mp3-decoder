@@ -19,8 +19,8 @@ fn main() -> Result<(), Error> {
     println!("Read {} bytes", buffer.len());
 
     let header = ID3v2Header::from_bytes(&buffer)?;
-    //println!("Header info");
-    //println!("{:#?}", header);
+    println!("Header info");
+    println!("{:?}", header);
 
     let start_of_audio = header.size;
     let audio_frames_bytes = &buffer[(start_of_audio as usize)..];
